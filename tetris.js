@@ -15,6 +15,22 @@ const player = {
     piece: piece
 }
 
+const keycode = {
+    ARROW_LEFT: 37,
+    ARROW_RIGHT: 39,
+    SPACE: 32
+}
+
+function keyPresses(player) {
+    document.addEventListener('keydown', event => {
+        if (event.keyCode === keycode.ARROW_LEFT) {
+            player.pos.x--
+        } else if (event.keyCode === keycode.ARROW_RIGHT) {
+            player.pos.x++
+        }
+    })
+}
+
 function render(context, player) {
     context.fillStyle = '#000'
     context.fillRect(0, 0, canvas.width, canvas.height)
@@ -53,3 +69,4 @@ function update(time = 0) {
 }
 
 update()
+keyPresses(player)
