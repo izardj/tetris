@@ -35,7 +35,19 @@ function drawMatrix(matrix, position) {
     })
 }
 
-function update() {
+let dropCounter = 0
+const dropInterval = 1000
+
+let lastTime = 0
+function update(time = 0) {
+    const deltaTime = time - lastTime
+    lastTime = time
+
+    dropCounter += deltaTime
+    if (dropCounter > dropInterval) {
+        player.pos.y++
+        dropCounter = 0
+    }
     render()
     requestAnimationFrame(update)
 }
