@@ -15,13 +15,13 @@ const player = {
     piece: piece
 }
 
-function render() {
+function render(context, player) {
     context.fillStyle = '#000'
     context.fillRect(0, 0, canvas.width, canvas.height)
-    drawMatrix(player.piece, player.pos)
+    drawMatrix(player.piece, player.pos, context)
 }
 
-function drawMatrix(matrix, position) {
+function drawMatrix(matrix, position, context) {
     piece.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
@@ -48,7 +48,7 @@ function update(time = 0) {
         player.pos.y++
         dropCounter = 0
     }
-    render()
+    render(context, player)
     requestAnimationFrame(update)
 }
 
