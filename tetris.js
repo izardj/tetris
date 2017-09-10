@@ -12,13 +12,33 @@ const piece = [
 
 const player = {
     pos: { x: 5, y: 5 },
-    piece: piece
+    piece: piece,
+    playground: createMatrix(10, 20)
 }
 
 const keycode = {
     ARROW_LEFT: 37,
     ARROW_RIGHT: 39,
     SPACE: 32
+}
+
+function collide(piece, offset, playground) {
+    for (let y = 0; y < piece.length; ++y) {
+        for (let x = 0; x < piece[y].length; ++x) {
+            if (piece[y][x] !== 0 && !playground[y + offset.y]) {
+                return true
+            }
+            if (piece[y][x] !== 0 && playground[y + offset.y][x + offset.x] !== 0) {
+                return true
+            }
+        }
+    }
+    console.log('OK')
+    return false
+}
+
+function createMatrix(width, height) {
+    return Array(height).fill().map(() => Array(width).fill(0))
 }
 
 function keyPresses(player) {
