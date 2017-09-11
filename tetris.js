@@ -27,6 +27,14 @@ function pieceInit(player) {
     return player
 }
 
+function pieceMove(pos, direction) {
+    if (direction === -1) {
+        pos.x--
+    } else if (direction === 1) {
+        pos.x++
+    }
+}
+
 function merge(piece, offset, playground) {
     const matrix = playground.map((row) => row.slice())
     piece.forEach((row, y) => {
@@ -60,9 +68,9 @@ function createMatrix(width, height) {
 function keyPresses(player) {
     document.addEventListener('keydown', event => {
         if (event.keyCode === keycode.ARROW_LEFT) {
-            player.pos.x--
+            pieceMove(player.pos, -1)
         } else if (event.keyCode === keycode.ARROW_RIGHT) {
-            player.pos.x++
+            pieceMove(player.pos, 1)
         }
     })
 }
