@@ -13,7 +13,7 @@ const piece = [
 const player = {
     pos: { x: 5, y: 5 },
     piece: piece,
-    playground: createMatrix(10, 22)
+    playground: createMatrix(10, 20)
 }
 
 const keycode = {
@@ -80,6 +80,7 @@ function render(context, player) {
     context.fillStyle = '#000'
     context.fillRect(0, 0, canvas.width, canvas.height)
     drawMatrix(player.piece, player.pos, context)
+    drawMatrix(player.playground, { x: 0, y: 0 }, context)
 }
 
 function drawMatrix(matrix, position, context) {
