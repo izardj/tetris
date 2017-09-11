@@ -33,7 +33,6 @@ function collide(piece, offset, playground) {
             }
         }
     }
-    console.log('OK')
     return false
 }
 
