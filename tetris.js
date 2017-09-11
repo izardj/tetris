@@ -22,6 +22,18 @@ const keycode = {
     SPACE: 32
 }
 
+function merge(piece, offset, playground) {
+    const matrix = playground.map((row) => row.slice())
+    piece.forEach((row, y) => {
+        row.forEach((cell, x) => {
+            if (cell !== 0) {
+                matrix[y + offset.y][x + offset.x] = cell
+            }
+        })
+    })
+    return matrix
+}
+
 function collide(piece, offset, playground) {
     for (let y = 0; y < piece.length; ++y) {
         for (let x = 0; x < piece[y].length; ++x) {
