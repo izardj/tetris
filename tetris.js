@@ -13,13 +13,18 @@ const piece = [
 const player = {
     pos: { x: 5, y: 5 },
     piece: piece,
-    playground: createMatrix(10, 20)
+    playground: createMatrix(10, 22)
 }
 
 const keycode = {
     ARROW_LEFT: 37,
     ARROW_RIGHT: 39,
     SPACE: 32
+}
+
+function pieceInit(player) {
+    player.pos.y = 0
+    return player
 }
 
 function merge(piece, offset, playground) {
@@ -62,6 +67,15 @@ function keyPresses(player) {
     })
 }
 
+function pieceDrop(player) {
+    player.pos.y++
+    if (collide(player.piece, player.pos, player.playground)) {
+        player.pos.y--
+        player.playground = merge(player.piece, player.pos, player.playground)
+        player = pieceInit(player)
+    }
+}
+
 function render(context, player) {
     context.fillStyle = '#000'
     context.fillRect(0, 0, canvas.width, canvas.height)
@@ -69,7 +83,7 @@ function render(context, player) {
 }
 
 function drawMatrix(matrix, position, context) {
-    piece.forEach((row, y) => {
+    matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
                 context.fillStyle = 'red'
@@ -92,7 +106,7 @@ function update(time = 0) {
 
     dropCounter += deltaTime
     if (dropCounter > dropInterval) {
-        player.pos.y++
+        pieceDrop(player)
         dropCounter = 0
     }
     render(context, player)
