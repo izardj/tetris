@@ -85,7 +85,7 @@ function update(time = 0) {
         dropCounter = 0
     }
     render(context, player)
-    requestAnimationFrame(update)
+    window.requestAnimationFrame(update)
 }
 
 update()
